@@ -6,7 +6,7 @@ services:
         dockerfile: ./.docker-config/nginx/Dockerfile
       image: registry.edge.incbtr.com/template/nginx:latest
       ports:
-          - 80:80
+          - 80
       volumes:
           - ./src/web:/var/www/html/web
 
@@ -49,7 +49,7 @@ services:
   phpmyadmin:
       image: phpmyadmin/phpmyadmin
       ports:
-          - 8085:80
+          - 80
       environment:
           PMA_HOST: database
 
