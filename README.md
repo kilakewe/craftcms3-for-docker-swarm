@@ -1,4 +1,4 @@
-# Craft 3 in Docker
+# Craft CMS for Docker Swarm
 
 `docker-compose up`
 

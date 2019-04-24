@@ -1,10 +1,14 @@
 FROM php:7.1-fpm
 
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev libjpeg62-turbo-dev \
         libmcrypt-dev libpng-dev libbz2-dev \
         libssl-dev autoconf \
-        ca-certificates curl g++ libicu-dev
+        ca-certificates curl g++ libicu-dev \
+        unzip
 
 RUN docker-php-ext-install \
         bcmath bz2 exif \

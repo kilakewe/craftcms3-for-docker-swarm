@@ -1,0 +1,61 @@
+version: '3'
+services:
+  nginx:
+    image: registry.edge.incbtr.com/template/nginx
+    volumes:
+      - site:/var/www/html/web
+    networks:
+      - traefik-public
+      - default
+    deploy:
+      labels:
+        traefik.tags: traefik-public
+        traefik.redirectorservice.frontend.redirect.entryPoint: https
+        traefik.webservice.frontend.entryPoints: https
+        traefik.redirectorservice.frontend.entryPoints: http
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.port: '80'
+        traefik.frontend.rule: Host:template.hatch.edge.incbtr.com,template.hatch,www.template.hatch
+
+  php:
+    image: registry.edge.incbtr.com/template/php
+    volumes:
+      - site:/var/www/html/web
+      #     - ./src/config:/var/www/html/config
+      #     - ./src/templates:/var/www/html/templates
+      #     - ./src/modules:/var/www/html/modules
+      #     - ./src/composer.json:/var/www/html/composer.json
+    networks:
+      - default
+    environment:
+      ENVIRONMENT: production
+      DB_DRIVER: mysql
+      DB_SERVER: database
+      DB_USER: project
+      DB_PASSWORD: project
+      DB_DATABASE: project
+      DB_TABLE_PREFIX: craft_
+      # SITE_URL: http://localhost
+      SECURITY_KEY: asdfasdfasdfasdfasdf
+
+  database:
+      image: mariadb:10.3
+      volumes:
+          - db-data:/var/lib/mysql
+      environment:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: project
+          MYSQL_USER: project
+          MYSQL_PASSWORD: project
+      networks:
+      - default
+
+volumes:
+  db-data:
+  site:
+
+networks:
+  traefik-public:
+    external: true
+  default:

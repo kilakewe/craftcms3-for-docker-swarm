@@ -4,6 +4,7 @@ services:
       build:
         context: .
         dockerfile: ./.docker-config/nginx/Dockerfile
+      image: registry.edge.incbtr.com/template/nginx:latest
       ports:
           - 80:80
       volumes:
@@ -13,6 +14,7 @@ services:
       build:
         context: .
         dockerfile: ./.docker-config/php/Dockerfile
+      image: registry.edge.incbtr.com/template/php:latest
       expose:
           - 9000
       volumes:
@@ -29,7 +31,7 @@ services:
         DB_PASSWORD: project
         DB_DATABASE: project
         DB_TABLE_PREFIX: craft_
-        SITE_URL: http://localhost
+        # SITE_URL: http://localhost
         SECURITY_KEY: asdfasdfasdfasdfasdf
 
   database:
@@ -53,3 +55,4 @@ services:
 
 volumes:
   db-data:
+  site: 
