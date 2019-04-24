@@ -2,8 +2,6 @@ version: '3'
 services:
   nginx:
     image: registry.edge.incbtr.com/template/nginx
-    volumes:
-      - site:/var/www/html/web
     networks:
       - traefik-public
       - default
@@ -20,12 +18,6 @@ services:
 
   php:
     image: registry.edge.incbtr.com/template/php
-    volumes:
-      - site:/var/www/html/web
-      #     - ./src/config:/var/www/html/config
-      #     - ./src/templates:/var/www/html/templates
-      #     - ./src/modules:/var/www/html/modules
-      #     - ./src/composer.json:/var/www/html/composer.json
     networks:
       - default
     environment:
@@ -36,7 +28,6 @@ services:
       DB_PASSWORD: project
       DB_DATABASE: project
       DB_TABLE_PREFIX: craft_
-      # SITE_URL: http://localhost
       SECURITY_KEY: asdfasdfasdfasdfasdf
 
   database:
@@ -53,7 +44,6 @@ services:
 
 volumes:
   db-data:
-  site:
 
 networks:
   traefik-public:
