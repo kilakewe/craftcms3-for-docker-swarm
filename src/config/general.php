@@ -12,7 +12,7 @@ return [
     // Global settings
     '*' => [
         // Default Week Start Day (0 = Sunday, 1 = Monday...)
-        'defaultWeekStartDay' => 0,
+        'defaultWeekStartDay' => 1,
 
         // Enable CSRF Protection (recommended)
         'enableCsrfProtection' => true,
@@ -52,5 +52,7 @@ return [
         // Base site URL
         'allowUpdates' => false,
         'siteUrl' => null,
+        'allowAdminChanges' => getenv('CRAFT_ALLOW_ADMIN_CHANGES') ?: true,
+        'isSystemLive' => true,
     ],
 ];

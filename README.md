@@ -1,5 +1,5 @@
 # Craft CMS for Docker Swarm
 
-`docker-compose up`
+## Setting up your loca environment
 
-[http://localhost/admin](http://localhost/admin)
+To get started with your local environment, simply run docker-compose up. This will run a local instance of CraftCMS, Nginx, MariaDB and phpmyadmin
